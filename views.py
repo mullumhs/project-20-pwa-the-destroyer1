@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash
 from models import db # Also import your database model here
+from models import db, Item
 
 # Define your routes inside the 'init_routes' function
 # Feel free to rename the routes and functions as you see fit
@@ -9,17 +10,45 @@ from models import db # Also import your database model here
 
 def init_routes(app):
 
-    @app.route('/', methods=['GET'])
-    def get_items():
-        # This route should retrieve all items from the database and display them on the page.
-        return render_template('index.html', message='Displaying all items')
+
+    @app.route('/')
+
+    def index():
+
+        item = Item.query.all()
+
+        return render_template('index.html', item=item)
+    
 
 
+    @app.route('/add', methods=['GET', 'POST'])
 
-    @app.route('/add', methods=['POST'])
-    def create_item():
-        # This route should handle adding a new item to the database.
-        return render_template('index.html', message='Item added successfully')
+    def add_movie():
+
+        if request.method == 'POST':
+
+            new_item = Item(
+
+                title=request.form['title'],
+
+                description=request.form['description'],
+
+                date_listed=int(request.form['date_listed']),
+
+                price=float(request.form['price']),
+
+                size=request.form['size'],
+            )
+
+            db.session.add(new_item)
+
+            db.session.commit()
+
+            return redirect(url_for('index'))
+
+        return render_template('add.html')
+
+
 
 
 
