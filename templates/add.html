@@ -11,7 +11,7 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <title>Movie List</title>
+    <title>Item List</title>
   </head>
 
   <body>
@@ -87,29 +87,31 @@
     <form method="post">
       <input type="text" name="title" placeholder="Title" required />
 
+      <input type="text" name="item_type" placeholder="item_type" required />
+
       <input
         type="text"
-        name="discription"
-        placeholder="Discription"
+        name="description"
+        placeholder="Description"
         required
       />
 
       <input type="text" name="size" placeholder="Size" required />
 
-      <input type="number" name="year" placeholder="Year" required />
-
       <input
         type="number"
-        step="0.1"
-        name="rating"
-        placeholder="Rating"
+        step="0.5"
+        name="price"
+        placeholder="price"
         required
       />
 
-      <input type="submit" value="Add Movie" />
+      <input type="text" name="colour" placeholder="color" required />
+
+      <input type="submit" value="Add Item" />
     </form>
 
-    <p>{{ movies }}</p>
+    <p>{{ item }}</p>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

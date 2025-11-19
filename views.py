@@ -12,38 +12,27 @@ def init_routes(app):
 
 
     @app.route('/')
-
     def index():
-
-        item = Item.query.all()
-
-        return render_template('index.html', item=item)
+        items = Item.query.all()
+        return render_template('index.html', items=items)
     
 
 
     @app.route('/add', methods=['GET', 'POST'])
-
     def add_movie():
 
         if request.method == 'POST':
-
             new_item = Item(
-
                 title=request.form['title'],
-
+                item_type=request.form['item_type'],
                 description=request.form['description'],
-
-                date_listed=int(request.form['date_listed']),
-
                 price=float(request.form['price']),
-
                 size=request.form['size'],
+                colour=request.form['colour'],
             )
 
             db.session.add(new_item)
-
             db.session.commit()
-
             return redirect(url_for('index'))
 
         return render_template('add.html')

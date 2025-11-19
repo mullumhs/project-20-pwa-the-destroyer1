@@ -149,23 +149,31 @@
       <tr>
         <th>Title</th>
 
-        <th>Discription</th>
+        <th>Item Type</th>
+
+        <th>Description</th>
 
         <th>Size</th>
 
-        <th>Rating</th>
+        <th>price</th>
+
+        <th>colour</th>
       </tr>
 
-      {% for movie in movies %}
+      {% for item in items %}
 
       <tr>
-        <td>{{ movie['title'] }}</td>
+        <td>{{ item['title'] }}</td>
 
-        <td>{{ movie['discription'] }}</td>
+        <td>{{ item['item_type'] }}</td>
 
-        <td>{{ movie['year'] }}</td>
+        <td>{{ item['description'] }}</td>
 
-        <td>{{ movie['rating'] }}</td>
+        <td>{{ item['size'] }}</td>
+
+        <td>{{ item['colour'] }}</td>
+
+        <td>{{ item['price'] }}</td>
       </tr>
 
       {% endfor %}
@@ -178,10 +186,10 @@
   </body>
   <style>
     h1 {
-      color: blueviolet;
+      color: rgb(223, 46, 46);
     }
     body {
-      background-image: linear-gradient(to right, #47317c, #feb47b);
+      background-image: linear-gradient(to right, #6946bb, #feb47b);
     }
   </style>
 </html>
