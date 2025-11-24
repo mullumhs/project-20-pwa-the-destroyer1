@@ -29,6 +29,7 @@ def init_routes(app):
                 price=float(request.form['price']),
                 size=request.form['size'],
                 colour=request.form['colour'],
+                images=request.form['image']
             )
 
             db.session.add(new_item)

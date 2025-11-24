@@ -8,6 +8,6 @@ class Item(db.Model):
     description = db.Column(db.Text, nullable=True)
     item_type = db.Column(db.String(100), nullable=True)
     price = db.Column(db.Float, nullable=True)
-    images = db.Column(db.String(100), nullable=True)
     size = db.Column(db.String(100), nullable=True)
     colour = db.Column(db.String(100), nullable=True)
+    images = db.Column(db.String(100), nullable=True)
