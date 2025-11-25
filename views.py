@@ -40,8 +40,6 @@ def init_routes(app):
 
 
 
-
-
     @app.route('/update', methods=['POST'])
     def update_item():
         # This route should handle updating an existing item identified by the given ID.
@@ -53,3 +51,10 @@ def init_routes(app):
     def delete_item():
         # This route should handle deleting an existing item identified by the given ID.
         return render_template('index.html', message=f'Item deleted successfully')
+    
+
+    # This route should retrieve all items from the database.
+
+    # Query the database to get all items and return them, formatted as a list of dictionaries.
+
+        return render_template('index.html', message='Displaying all items')

@@ -11,7 +11,7 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <title>Movie List</title>
+    <title>Item List</title>
   </head>
 
   <body>
@@ -140,48 +140,20 @@
 
     <h1>Item Database</h1>
 
-    <table>
-      <tr>
-        <th>Title</th>
-
-        <th>Item Type</th>
-
-        <th>Description</th>
-
-        <th>Size</th>
-
-        <th>price</th>
-
-        <th>colour</th>
-      </tr>
-
-      {% for item in items %}
-
-      <tr>
-        <td>{{ item['title'] }}</td>
-
-        <td>{{ item['item_type'] }}</td>
-
-        <td>{{ item['description'] }}</td>
-
-        <td>{{ item['size'] }}</td>
-
-        <td>{{ item['colour'] }}</td>
-
-        <td>{{ item['price'] }}</td>
-      </tr>
-
-      <div class="card" style="width: 18rem">
-        <img src="{{ item['images'] }}" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{{ item['title'] }}</h5>
-          <p class="card-text">{{ item['description'] }}</p>
-          <p class="card-text">{{ item['price'] }}</p>
-          <a href="#" class="btn btn-primary">Veiw Item</a>
-        </div>
+  <div class="card-grid">
+  {% for item in items %}
+    <div class="card">
+      <img src="{{ item['images'] }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ item['title'] }}</h5>
+        <p class="card-text">{{ item['description'] }}</p>
+        <p class="card-text">{{ item['price'] }}</p>
+        <a href="#" class="btn btn-primary">View Item</a>
       </div>
+    </div>
+  {% endfor %}
+  </div>
 
-      {% endfor %}
     </table>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -196,5 +168,16 @@
     body {
       background-image: linear-gradient(to right, #6946bb, #feb47b);
     }
+
+    .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+    gap: 50px; /* spacing between cards */
+    }
+
+    .card {
+      width: 70%;
+    }
+
   </style>
 </html>

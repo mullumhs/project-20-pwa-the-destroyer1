@@ -11,3 +11,4 @@ class Item(db.Model):
     size = db.Column(db.String(100), nullable=True)
     colour = db.Column(db.String(100), nullable=True)
     images = db.Column(db.String(100), nullable=True)
+
