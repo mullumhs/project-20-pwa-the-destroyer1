@@ -1,26 +1,15 @@
 from flask import render_template, request, redirect, url_for, flash
-from models import db # Also import your database model here
 from models import db, Item
 
-# Define your routes inside the 'init_routes' function
-# Feel free to rename the routes and functions as you see fit
-# You may need to use multiple methods such as POST and GET for each route
-# You can use render_template or redirect as appropriate
-# You can also use flash for displaying status messages
-
 def init_routes(app):
-
 
     @app.route('/')
     def index():
         items = Item.query.all()
         return render_template('index.html', items=items)
-    
-
 
     @app.route('/add', methods=['GET', 'POST'])
     def add_movie():
-
         if request.method == 'POST':
             new_item = Item(
                 title=request.form['title'],
@@ -31,30 +20,36 @@ def init_routes(app):
                 colour=request.form['colour'],
                 images=request.form['image']
             )
-
             db.session.add(new_item)
             db.session.commit()
+            flash('Item added successfully!', 'success')
             return redirect(url_for('index'))
 
         return render_template('add.html')
 
+    @app.route('/update>', methods=['GET', 'POST'])
+    def update_item(item_id):
+        item = Item.query.get_or_404(item_id)
 
+        if request.method == 'POST':
+            item.title = request.form['title']
+            item.item_type = request.form['item_type']
+            item.description = request.form['description']
+            item.size = request.form['size']
+            item.price = float(request.form['price'])
+            item.colour = request.form['colour']
+            item.images = request.form['image']
 
-    @app.route('/update', methods=['POST'])
-    def update_item():
-        # This route should handle updating an existing item identified by the given ID.
-        return render_template('index.html', message=f'Item updated successfully')
+            db.session.commit()
+            flash('Item updated successfully!', 'success')
+            return redirect(url_for('index'))
 
+        return render_template('update.html', item=item)
 
-
-    @app.route('/delete', methods=['POST'])
-    def delete_item():
-        # This route should handle deleting an existing item identified by the given ID.
-        return render_template('index.html', message=f'Item deleted successfully')
-    
-
-    # This route should retrieve all items from the database.
-
-    # Query the database to get all items and return them, formatted as a list of dictionaries.
-
-        return render_template('index.html', message='Displaying all items')
+    @app.route('/delete/<int:item_id>', methods=['POST'])
+    def delete_item(item_id):
+        item = Item.query.get_or_404(item_id)
+        db.session.delete(item)
+        db.session.commit()
+        flash('Item deleted successfully!', 'success')
+        return redirect(url_for('index'))
