@@ -26,6 +26,14 @@ def init_routes(app):
             return redirect(url_for('index'))
 
         return render_template('add.html')
+    
+
+    @app.route('/view', methods=['GET'])
+    def view_items():
+        "Display all items from the database."
+        items = Item.query.all()
+        return render_template('view.html', items=items)
+
 
     @app.route('/update>', methods=['GET', 'POST'])
     def update_item(item_id):
