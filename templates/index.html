@@ -77,15 +77,16 @@ content %}
       <h5 class="card-title">{{ item['title'] }}</h5>
       <p class="card-text">{{ item['description'] }}</p>
       <p class="card-text">{{ item['price'] }}</p>
-      <a href="#" class="btn btn-primary">View Item</a>
+      <a href="{{ url_for('view_item', id=item.id) }}" class="btn btn-primary"
+        >View Item</a
+      >
+      <a href="{{ url_for('update_item', id=item.id) }}" class="btn btn-warning"
+        >Edit</a
+      >
     </div>
   </div>
   {% endfor %}
 </div>
 {% endblock %}
-
-<a href="{{ url_for('update_item', item_id=item.id) }}" class="btn btn-warning"
-  >Edit</a
->
 
 <style></style>

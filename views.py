@@ -9,7 +9,26 @@ def init_routes(app):
         return render_template('index.html', items=items)
 
     @app.route('/add', methods=['GET', 'POST'])
-    def add_movie():
+    def add_item():
+        if request.method == 'POST':
+            new_item = Item(
+                title=request.form['title'],
+                item_type=request.form['item_type'],
+                description=request.form['description'],
+                price=float(request.form['price']),
+                size=request.form['size'],
+                colour=request.form['colour'],
+                images=request.form['image']
+            )
+            db.session.add(new_item)
+            db.session.commit()
+            flash('Item added successfully!', 'success')
+            return redirect(url_for('index'))
+
+        return render_template('add.html')
+    
+    @app.route('/edit/<id>', methods=['GET', 'POST'])
+    def edit_item():
         if request.method == 'POST':
             new_item = Item(
                 title=request.form['title'],
@@ -28,11 +47,10 @@ def init_routes(app):
         return render_template('add.html')
     
 
-    @app.route('/view', methods=['GET'])
-    def view_items():
-        "Display all items from the database."
-        items = Item.query.all()
-        return render_template('view.html', items=items)
+    @app.route('/item/<id>', methods=['GET'])
+    def view_item(id):
+        item = Item.query.get(id)
+        return render_template('item.html', item=item)
 
 
     @app.route('/update>', methods=['GET', 'POST'])
