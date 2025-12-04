@@ -28,7 +28,7 @@ def init_routes(app):
         return render_template('add.html')
     
     @app.route('/edit/<id>', methods=['GET', 'POST'])
-    def edit_item():
+    def edit_item(id):
         if request.method == 'POST':
             new_item = Item(
                 title=request.form['title'],
@@ -43,8 +43,8 @@ def init_routes(app):
             db.session.commit()
             flash('Item added successfully!', 'success')
             return redirect(url_for('index'))
-
-        return render_template('add.html')
+        item = Item.query.get(id)    
+        return render_template('edit.html', item=item)
     
 
     @app.route('/item/<id>', methods=['GET'])
@@ -53,24 +53,6 @@ def init_routes(app):
         return render_template('item.html', item=item)
 
 
-    @app.route('/update>', methods=['GET', 'POST'])
-    def update_item(item_id):
-        item = Item.query.get_or_404(item_id)
-
-        if request.method == 'POST':
-            item.title = request.form['title']
-            item.item_type = request.form['item_type']
-            item.description = request.form['description']
-            item.size = request.form['size']
-            item.price = float(request.form['price'])
-            item.colour = request.form['colour']
-            item.images = request.form['image']
-
-            db.session.commit()
-            flash('Item updated successfully!', 'success')
-            return redirect(url_for('index'))
-
-        return render_template('update.html', item=item)
 
     @app.route('/delete/<int:item_id>', methods=['POST'])
     def delete_item(item_id):
