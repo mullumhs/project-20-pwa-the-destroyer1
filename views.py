@@ -29,23 +29,23 @@ def init_routes(app):
     
     @app.route('/edit/<id>', methods=['GET', 'POST'])
     def edit_item(id):
+        item = Item.query.get_or_404(id)   # fetch existing item or 404 if not found
+
         if request.method == 'POST':
-            new_item = Item(
-                title=request.form['title'],
-                item_type=request.form['item_type'],
-                description=request.form['description'],
-                price=float(request.form['price']),
-                size=request.form['size'],
-                colour=request.form['colour'],
-                images=request.form['image']
-            )
-            db.session.add(new_item)
-            db.session.commit()
-            flash('Item added successfully!', 'success')
+            # update existing item instead of creating new one
+            item.title = request.form['title']
+            item.item_type = request.form['item_type']
+            item.description = request.form['description']
+            item.price = float(request.form['price'])
+            item.size = request.form['size']
+            item.colour = request.form['colour']
+            item.images = request.form['image']
+
+            db.session.commit()   # no need to add(), just commit changes
+            flash('Item updated successfully!', 'success')
             return redirect(url_for('index'))
-        item = Item.query.get(id)    
+
         return render_template('edit.html', item=item)
-    
 
     @app.route('/item/<id>', methods=['GET'])
     def view_item(id):
@@ -54,10 +54,11 @@ def init_routes(app):
 
 
 
-    @app.route('/delete/<int:item_id>', methods=['POST'])
-    def delete_item(item_id):
-        item = Item.query.get_or_404(item_id)
+    @app.route('/delete/<int:id>', methods=['POST'])
+    def delete_item(id):
+        item = Item.query.get_or_404(id)
         db.session.delete(item)
         db.session.commit()
         flash('Item deleted successfully!', 'success')
         return redirect(url_for('index'))
+
