@@ -5,7 +5,13 @@ def init_routes(app):
 
     @app.route('/')
     def index():
-        items = Item.query.all()
+        title = request.args.get("title", "")
+        if not title:
+            items = Item.query.all()
+        
+        else:
+            items = Item.query.filter(Item.title==title)
+
         return render_template('index.html', items=items)
 
     @app.route('/add', methods=['GET', 'POST'])
