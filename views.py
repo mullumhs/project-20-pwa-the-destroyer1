@@ -6,13 +6,20 @@ def init_routes(app):
     @app.route('/')
     def index():
         title = request.args.get("title", "")
-        if not title:
-            items = Item.query.all()
-        
-        else:
-            items = Item.query.filter(Item.title==title)
+        item_type = request.args.get("item_type", "")
+
+        query = Item.query
+
+        # Apply filters if present
+        if title:
+            query = query.filter(Item.title.ilike(f"%{title}%"))
+        if item_type:
+            query = query.filter(Item.item_type == item_type)
+
+        items = query.all()
 
         return render_template('index.html', items=items)
+
 
     @app.route('/add', methods=['GET', 'POST'])
     def add_item():
