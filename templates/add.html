@@ -1,13 +1,12 @@
-<!-- templates/add.html -->
 {% extends "base.html" %} {% block title %}Add Item{% endblock %} {% block
 content %}
-<div class="container py-4">
-  <h1>Add New Item To Database</h1>
+<div class="container py-4 surf-form">
+  <h1 class="surf-heading">🏄 Add New Item To Database 🌴</h1>
 
   <form method="post" class="row g-3">
     <div class="col-12 col-md-6">
       <input
-        class="form-control"
+        class="form-control surf-input"
         type="text"
         name="title"
         placeholder="Title"
@@ -17,17 +16,17 @@ content %}
 
     <div class="col-12 col-md-6">
       <input
-        class="form-control"
+        class="form-control surf-input"
         type="text"
         name="item_type"
-        placeholder="item_type"
+        placeholder="Item Type"
         required
       />
     </div>
 
     <div class="col-12">
       <input
-        class="form-control"
+        class="form-control surf-input"
         type="text"
         name="description"
         placeholder="Description"
@@ -37,7 +36,7 @@ content %}
 
     <div class="col-12 col-md-4">
       <input
-        class="form-control"
+        class="form-control surf-input"
         type="text"
         name="size"
         placeholder="Size"
@@ -47,37 +46,37 @@ content %}
 
     <div class="col-12 col-md-4">
       <input
-        class="form-control"
+        class="form-control surf-input"
         type="number"
         step="0.5"
         name="price"
-        placeholder="price"
+        placeholder="Price"
         required
       />
     </div>
 
     <div class="col-12 col-md-4">
       <input
-        class="form-control"
+        class="form-control surf-input"
         type="text"
         name="colour"
-        placeholder="colour"
+        placeholder="Colour"
         required
       />
     </div>
 
     <div class="col-12">
       <input
-        class="form-control"
+        class="form-control surf-input"
         type="text"
         name="image"
-        placeholder="Image"
+        placeholder="Image URL"
         required
       />
     </div>
 
     <div class="col-12">
-      <button class="btn btn-primary" type="submit">Add Item</button>
+      <button class="btn surf-btn" type="submit">🌺 Add Item 🌺</button>
     </div>
   </form>
 
@@ -85,12 +84,69 @@ content %}
 </div>
 {% endblock %} {% block page_styles %}
 <style>
-  /* Keep your add page’s original look */
-  h1 {
-    color: blueviolet;
-  }
+  /* Retro surf aesthetic */
   body {
-    background-image: radial-gradient(circle, #585ad8, #382961);
+    background: linear-gradient(135deg, #ffcc70, #ff8177, #cf556c, #6a82fb);
+    background-size: 400% 400%;
+    animation: surfGradient 15s ease infinite;
+    color: #fff;
+  }
+
+  @keyframes surfGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .surf-heading {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fffbe6;
+    text-shadow: 2px 2px #ff6f61;
+    margin-bottom: 1.5rem;
+  }
+
+  .surf-form {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(6px);
+  }
+
+  .surf-input {
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    background-color: #fffbe6;
+    color: #333;
+    font-family: "Comic Sans MS", cursive;
+    transition: transform 0.2s ease;
+  }
+
+  .surf-input:focus {
+    transform: scale(1.05);
+    border-color: #00c9ff;
+    box-shadow: 0 0 10px #00c9ff;
+  }
+
+  .surf-btn {
+    background: #00c9ff;
+    color: #fff;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .surf-btn:hover {
+    background: #ff6f61;
+    transform: scale(1.1);
   }
 </style>
 {% endblock %}

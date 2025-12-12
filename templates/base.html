@@ -65,8 +65,8 @@
                   <a class="dropdown-item" href="/?item_type=Shorts">Shorts</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/?item_type=Surfwax"
-                    >Surf Wax</a
+                  <a class="dropdown-item" href="/?item_type=Accessory"
+                    >Accessories</a
                   >
                 </li>
                 <li><hr class="dropdown-divider" /></li>
@@ -102,8 +102,24 @@
       h1 {
         color: rgb(223, 46, 46);
       }
+
       body {
-        background-image: linear-gradient(to right, #483c63, #7a2034);
+        background: linear-gradient(to right, #483c63, #7a2034);
+        background-size: 400% 400%; /* makes the gradient larger so it can move */
+        animation: surfGradient 15s ease infinite;
+        font-family: "Pacifico", cursive, sans-serif;
+      }
+
+      @keyframes surfGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
       .card-grid {
         display: grid;
