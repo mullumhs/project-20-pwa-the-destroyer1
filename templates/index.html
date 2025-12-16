@@ -107,10 +107,23 @@ content %}
 {% endblock %} {% block page_styles %}
 <style>
   h1 {
-    color: blueviolet;
     text-align: center;
     margin-bottom: 20px;
+    font-family: "Pacifico", cursive;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+
+    /* Retro gradient background */
+    background: linear-gradient(90deg, #f5b67c, #ffd166, #06d6a0, #118ab2);
+
+    /* Clip background to text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Optional shadow for retro depth */
+    text-shadow: 12px 12px 14px rgba(0, 0, 0, 0.4);
   }
+
   .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
